@@ -1,0 +1,353 @@
+/* ==========================================
+   CSS VARIABLES & SAAS THEME CONFIGURATION
+   ========================================== */
+   :root {
+    --primary: #0d1b2a;       /* Deep Navy */
+    --secondary: #800000;     /* Maroon (Used sparingly) */
+    --accent: #00b4d8;        /* Vivid Teal */
+    --accent-glow: rgba(0, 180, 216, 0.4);
+    
+    /* Default: Dark Theme (for LORANXX Vibe) */
+    --bg-color: #060e17;      /* Super dark navy for modern SaaS */
+    --section-bg: #0d1b2a;
+    --section-bg-alt: #0a1421;
+    --card-bg: rgba(13, 27, 42, 0.6);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8f9fa;
+    --text-muted: #94a3b8;
+    --nav-bg: rgba(6, 14, 23, 0.85);
+    --input-bg: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --section-bg: #f8fafc;
+    --section-bg-alt: #f1f5f9;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --input-bg: #f8fafc;
+}
+
+/* ==========================================
+   GLOBAL TYPOGRAPHY & RESET
+   ========================================== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+    transition: color 0.4s ease;
+    line-height: 1.2;
+}
+
+.text-main { color: var(--text-main) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-accent { color: var(--accent) !important; }
+.bg-accent-soft { background-color: rgba(0, 180, 216, 0.1) !important; }
+
+a { text-decoration: none; }
+
+.tracking-wide { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.15em; }
+
+/* Custom SaaS Section Padding (Spacious) */
+.py-saas {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+@media (max-width: 991px) {
+    .py-saas { padding-top: 80px; padding-bottom: 80px; }
+}
+
+.section-bg { background-color: var(--section-bg); }
+.section-bg-alt { background-color: var(--section-bg-alt); }
+.border-top, .border-bottom, .border-y { border-color: var(--card-border) !important; }
+.border-y { border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
+
+/* Gradient Text for Main Headline */
+.text-gradient {
+    background: linear-gradient(to right, #00b4d8, #48cae4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Eyebrow Text (Small caps above headings) */
+.eyebrow {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+/* Scroll Progress */
+#scroll-progress {
+    position: fixed;
+    top: 0; left: 0; height: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    width: 0%; z-index: 2000;
+}
+
+/* ==========================================
+   PRELOADER
+   ========================================== */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: #060e17; z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.ai-core-container { position: relative; width: 120px; height: 120px; }
+.ring { position: absolute; border-radius: 50%; top: 0; left: 0; right: 0; bottom: 0; border: 1px solid transparent; }
+.ring-1 { border-top: 3px solid var(--accent); border-right: 3px solid var(--accent); animation: rotate 1.5s linear infinite; }
+.ring-2 { border-bottom: 3px solid rgba(255,255,255,0.5); margin: 10px; animation: rotate-reverse 2s linear infinite; }
+.ring-3 { border-top: 2px solid var(--accent); margin: 25px; animation: rotate 1s linear infinite; }
+.core-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 25px; height: 25px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 20px var(--accent); animation: pulse 1s alternate infinite; }
+
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+@keyframes rotate-reverse { 100% { transform: rotate(-360deg); } }
+@keyframes pulse { 0% { transform: translate(-50%,-50%) scale(0.8); } 100% { transform: translate(-50%,-50%) scale(1.2); } }
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+.navbar {
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+}
+.navbar.scrolled {
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--card-border);
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+.nav-link {
+    color: var(--text-muted) !important;
+    transition: color 0.3s;
+}
+.nav-link:hover, .nav-link.active { color: var(--text-main) !important; }
+
+/* Switch / Toggles */
+.custom-switch .form-check-input {
+    cursor: pointer; width: 3.2em; height: 1.6em;
+    background-color: #334155; border-color: #334155;
+}
+.custom-switch .form-check-input:checked {
+    background-color: var(--accent); border-color: var(--accent);
+}
+.theme-icon { color: var(--text-muted); }
+
+/* ==========================================
+   BUTTONS (SaaS & Glow Styles)
+   ========================================== */
+.btn-glow {
+    background-color: var(--accent);
+    color: #060e17;
+    border: 1px solid var(--accent);
+    box-shadow: 0 4px 15px var(--accent-glow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.btn-glow:hover {
+    background-color: #0096b4; border-color: #0096b4;
+    color: #fff;
+    box-shadow: 0 8px 25px var(--accent-glow);
+    transform: translateY(-2px);
+}
+.btn-outline-main {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+.btn-outline-main:hover {
+    background-color: var(--card-border);
+    color: var(--text-main);
+}
+.btn-icon {
+    width: 45px; height: 45px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-main);
+}
+
+/* ==========================================
+   HERO & HOLOGRAPHIC CORE
+   ========================================== */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+.tech-grid-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(var(--card-border) 1px, transparent 1px), linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+    background-size: 50px 50px; background-position: center;
+    opacity: 0.5; z-index: 0;
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+.jarvis-holo-core { position: relative; width: 350px; height: 350px; }
+.holo-ring { position: absolute; border-radius: 50%; top: 0; left: 0; right: 0; bottom: 0; border: 1px dashed var(--card-border); }
+.hr-1 { border: 1px solid var(--accent); animation: rotate 12s linear infinite; box-shadow: inset 0 0 40px rgba(0, 180, 216, 0.1); }
+.hr-2 { margin: 30px; border: 2px dashed var(--accent); animation: rotate-reverse 18s linear infinite; opacity: 0.5; }
+.hr-3 { margin: 70px; border: 1px dotted var(--text-muted); animation: rotate 10s linear infinite; }
+.holo-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 5rem; color: var(--accent); text-shadow: 0 0 30px var(--accent); animation: pulse 2s infinite alternate; }
+
+/* ==========================================
+   SAAS CARDS & CONTAINERS
+   ========================================== */
+.saas-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border) !important;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    color: var(--text-main);
+}
+.saas-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 0 20px var(--accent-glow);
+    border-color: rgba(0, 180, 216, 0.3) !important;
+}
+
+/* Custom badge for Positional Spy Module */
+.saas-badge {
+    background-color: var(--input-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* ==========================================
+   GALLERY / VISUALIZATIONS
+   ========================================== */
+.img-wrapper {
+    position: relative;
+    cursor: pointer;
+    border-radius: 20px 20px 0 0;
+}
+.saas-card .img-wrapper { border-radius: 20px; } /* For images spanning full card */
+.object-fit-cover { object-fit: cover; }
+
+.scanner-line {
+    position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--accent); box-shadow: 0 0 15px var(--accent);
+    opacity: 0; z-index: 2; transition: opacity 0.3s; pointer-events: none;
+}
+.img-wrapper:hover .scanner-line { opacity: 1; animation: scanImage 2s ease-in-out infinite; }
+@keyframes scanImage { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
+
+.overlay-ui {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(6,14,23,0.9) 0%, transparent 60%);
+    pointer-events: none;
+}
+.overlay-icon {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
+    font-size: 2.5rem; color: #fff; z-index: 3; opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 0 0 15px var(--accent); background: rgba(0,180,216,0.2);
+    border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;
+}
+.img-wrapper:hover .overlay-icon { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+
+/* ==========================================
+   MODULES (BOOTSTRAP PLUGINS) OVERRIDES
+   ========================================== */
+.module-action-area { min-height: 80px; display: flex; flex-direction: column; justify-content: end; }
+
+/* Inputs / Forms */
+.saas-input {
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--card-border) !important;
+    color: var(--text-main) !important;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+/* FIX: Ensure placeholders are readable */
+.saas-input::-webkit-input-placeholder { color: var(--text-muted) !important; opacity: 0.8 !important; }
+.saas-input::-moz-placeholder          { color: var(--text-muted) !important; opacity: 0.8 !important; }
+.saas-input:-ms-input-placeholder      { color: var(--text-muted) !important; opacity: 0.8 !important; }
+.saas-input::-ms-input-placeholder     { color: var(--text-muted) !important; opacity: 0.8 !important; }
+.saas-input::placeholder               { color: var(--text-muted) !important; opacity: 0.8 !important; }
+
+.saas-input:focus {
+    box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.15) !important;
+    border-color: var(--accent) !important;
+}
+
+/* Alerts */
+.saas-alert { background-color: rgba(0,180,216,0.1); border: 1px solid var(--accent); color: var(--text-main); }
+/* Dropdowns */
+.saas-dropdown { background: var(--bg-color); border: 1px solid var(--card-border); padding: 10px; border-radius: 12px; }
+.saas-dropdown .dropdown-item { color: var(--text-muted); border-radius: 8px; transition: 0.2s; }
+.saas-dropdown .dropdown-item:hover { background-color: rgba(0,180,216,0.1); color: var(--accent); }
+/* Tabs */
+.saas-tabs { border-bottom: 2px solid var(--card-border); }
+.saas-tabs .nav-link { color: var(--text-muted); border: none; font-weight: 600; }
+.saas-tabs .nav-link.active { background: transparent; color: var(--accent); border-bottom: 2px solid var(--accent); margin-bottom: -2px; }
+
+/* Tooltip / Popover */
+.popover, .tooltip-inner { 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--bg-color); 
+    border: 1px solid var(--card-border); 
+    color: var(--text-main); 
+}
+.popover-header { 
+    background: var(--section-bg); 
+    border-bottom: 1px solid var(--card-border); 
+    color: var(--text-main); 
+}
+.popover-body {
+    color: var(--text-muted); /* FIX: Overrides Bootstrap's dark text color in popover body */
+}
+
+/* ==========================================
+   MODALS / OFFCANVAS
+   ========================================== */
+.saas-modal .modal-content, .saas-offcanvas {
+    background-color: var(--bg-color);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.custom-close { filter: invert(1) grayscale(100%) brightness(200%); opacity: 0.5; }
+[data-theme="light"] .custom-close { filter: none; }
+.custom-close:hover { opacity: 1; }
+
+.z-index-toast { z-index: 1055; }
+
+/* ==========================================
+   FLOATING ELEMENTS
+   ========================================== */
+.footer { background-color: var(--bg-color); }
+.floating-btn {
+    position: fixed; bottom: 30px; width: 55px; height: 55px; border-radius: 50%;
+    background-color: var(--bg-color); color: var(--accent); border: 1px solid var(--card-border);
+    display: flex; justify-content: center; align-items: center; cursor: pointer;
+    z-index: 1000; transition: all 0.3s;
+}
+.floating-btn:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,180,216,0.3) !important; transform: translateY(-5px); }
+
+#aiAssistant { right: 30px; animation: bounce 3s ease-in-out infinite; }
+#backToTop { left: 30px; opacity: 0; visibility: hidden; }
+#backToTop.show { opacity: 1; visibility: visible; }
+
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.cursor-blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
